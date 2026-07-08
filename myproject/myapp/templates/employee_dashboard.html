@@ -1,0 +1,214 @@
+{% extends 'empbase.html' %}
+
+{% block title %}
+Employee Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Welcome, {{ employee.user.get_full_name }}
+</h1>
+
+<!-- ================= KPI CARDS ================= -->
+
+<div class="employee-cards">
+
+    <div class="employee-card">
+
+        <div class="icon">
+            <i class="fa-solid fa-id-card"></i>
+        </div>
+
+        <div>
+            <h2>{{ employee.employee_id }}</h2>
+            <p>Employee ID</p>
+        </div>
+
+    </div>
+
+    <div class="employee-card">
+
+        <div class="icon">
+            <i class="fa-solid fa-clock"></i>
+        </div>
+
+        <div>
+            <h2>{{ pending_leave }}</h2>
+            <p>Pending Leave</p>
+        </div>
+
+    </div>
+
+    <div class="employee-card">
+
+        <div class="icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div>
+            <h2>{{ approved_leave }}</h2>
+            <p>Approved Leave</p>
+        </div>
+
+    </div>
+
+    <div class="employee-card">
+
+        <div class="icon">
+            <i class="fa-solid fa-calendar-days"></i>
+        </div>
+
+        <div>
+            <h2>{{ total_leave }}</h2>
+            <p>Total Leaves</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= SECOND ROW ================= -->
+
+<div class="employee-grid">
+
+    <!-- Employee Information -->
+
+    <div class="employee-dashboard-card">
+
+        <h3>My Information</h3>
+
+        <div class="employee-info">
+
+            <div class="employee-box">
+                <h5>Name</h5>
+                <p>{{ employee.user.get_full_name }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Employee ID</h5>
+                <p>{{ employee.employee_id }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Department</h5>
+                <p>{{ employee.department }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Designation</h5>
+                <p>{{ employee.designation }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Phone</h5>
+                <p>{{ employee.phone }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Gender</h5>
+                <p>{{ employee.gender }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Joining Date</h5>
+                <p>{{ employee.joining_date }}</p>
+            </div>
+
+            <div class="employee-box">
+                <h5>Status</h5>
+                <p>{{ employee.status }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Leave Requests -->
+
+    <div class="employee-dashboard-card">
+
+        <div class="employee-header">
+
+            <h3>Recent Leave Requests</h3>
+
+            <a href="{% url 'leave_history' %}">View All</a>
+
+        </div>
+
+        <table class="employee-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Type</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for leave in recent_leaves %}
+
+                <tr>
+
+                    <td>{{ leave.leave_type }}</td>
+
+                    <td>{{ leave.start_date }}</td>
+
+                    <td>{{ leave.end_date }}</td>
+
+                    <td>
+
+                        <span class="status {{ leave.status|lower }}">
+
+                            {{ leave.status }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4">
+
+                        No Leave Requests
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ================= BUTTON ================= -->
+
+<div style="margin-top:30px;">
+
+    <a href="{% url 'apply_leave' %}" class="employee-btn">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Apply Leave
+
+    </a>
+
+</div>
+
+{% endblock %}

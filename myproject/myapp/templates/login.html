@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HR Portal Login</title>
+
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Left Section -->
+
+    <div class="left-panel">
+
+        <h1>
+            HR Management <br>
+            System
+        </h1>
+
+        <p class="subtitle">
+            Manage employees, leave requests, and company information
+            from one modern dashboard.
+        </p>
+
+        <img src="{% static 'images/login_img.png' %}"
+             alt="HR Illustration">
+
+    </div>
+
+
+    <!-- Right Section -->
+
+    <div class="right-panel">
+
+        <div class="login-card">
+
+            <h2>Welcome Back</h2>
+
+            <p>Login to continue</p>
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="error">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        required>
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        required>
+
+                </div>
+
+
+                <div class="remember">
+
+                    <label>
+
+                        <input type="checkbox">
+
+                        Remember Me
+
+                    </label>
+
+                </div>
+
+
+                <button type="submit">
+
+                    Login
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

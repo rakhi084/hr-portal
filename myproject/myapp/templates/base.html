@@ -1,0 +1,110 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>{% block title %}HR Portal{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-bolt"></i>
+
+          <h2>HR PORTAL</h2>
+        </div>
+
+        <div class="menu">
+          <h4>MENU</h4>
+
+          <a href="{% url 'hr_dashboard' %}" class="active">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+          </a>
+
+          <h4>EMPLOYEES</h4>
+
+          <a href="{% url 'add_employee' %}">
+            <i class="fa-solid fa-user-plus"></i>
+            Add Employee
+          </a>
+
+          <a href="{% url 'employee_list' %}">
+            <i class="fa-solid fa-users"></i>
+            View Employees
+          </a>
+
+          <h4>LEAVE MANAGEMENT</h4>
+
+          <a href="{% url 'leave_requests' %}">
+            <i class="fa-solid fa-calendar-days"></i>
+            Pending Requests
+          </a>
+
+          <a href="{% url 'approved_leaves' %}">
+            <i class="fa-solid fa-circle-check"></i>
+            Approved Leaves
+          </a>
+
+          <a href="{% url 'rejected_leaves' %}">
+            <i class="fa-solid fa-circle-xmark"></i>
+            Rejected Leaves
+          </a>
+        </div>
+
+        <div class="logout">
+          <a href="{% url 'login' %}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main -->
+
+      <main class="main-content">
+        <!-- Navbar -->
+
+        <nav class="navbar">
+          <div>
+            <h1>Welcome, {{ request.user.first_name }}</h1>
+
+            <p>Track and manage your employees efficiently.</p>
+          </div>
+
+          <div class="nav-right">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <input type="text" placeholder="Search" />
+            </div>
+
+            <button class="export-btn">Export</button>
+
+            <img src="https://i.pravatar.cc/45" class="profile" />
+          </div>
+        </nav>
+
+        {% block content %} {% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

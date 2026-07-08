@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<!-- ===================== KPI CARDS ===================== -->
+
+<div class="cards">
+
+    <div class="card">
+        <div class="icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div>
+            <h2>{{ total_employee }}</h2>
+            <p>Total Employees</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">
+            <i class="fa-solid fa-building"></i>
+        </div>
+
+        <div>
+            <h2>{{ departments }}</h2>
+            <p>Departments</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">
+            <i class="fa-solid fa-calendar-xmark"></i>
+        </div>
+
+        <div>
+            <h2>{{ pending_leave }}</h2>
+            <p>Pending Leave</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div>
+            <h2>{{ approved_leave }}</h2>
+            <p>Approved Leave</p>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ===================== SECOND ROW ===================== -->
+
+<div class="dashboard-grid">
+
+    <!-- Recent Employees -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Recent Employees</h3>
+
+            <a href="#">View All</a>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for employee in employees %}
+
+                <tr>
+
+                    <td>{{ employee.employee_id }}</td>
+
+                    <td>{{ employee.user.get_full_name }}</td>
+
+                    <td>{{ employee.department }}</td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="3">
+
+                        No Employees Found
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- Pending Leave Requests -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Pending Leave Requests</h3>
+
+        </div>
+
+        <div class="leave-list">
+
+            {% for leave in pending_leaves %}
+
+            <div class="leave-item">
+
+                <div>
+
+                    <h4>{{ leave.employee.user.get_full_name }}</h4>
+
+                    <p>{{ leave.leave_type }}</p>
+
+                </div>
+
+                <span class="pending">
+
+                    {{ leave.status }}
+
+                </span>
+
+            </div>
+
+            {% empty %}
+
+            <p>No Pending Leave Requests</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== THIRD ROW ===================== -->
+
+<div class="dashboard-grid second-row">
+
+    <!-- Department Distribution -->
+
+    <div class="dashboard-card">
+
+        <h3>Employee Distribution</h3>
+
+        {% for dept in department_distribution %}
+
+        <div class="progress-item">
+
+            <div class="progress-title">
+
+                <span>{{ dept.department }}</span>
+
+                <span>{{ dept.total }}</span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    style="width:{% widthratio dept.total total_employee 100 %}%">
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p>No Employees Available</p>
+
+        {% endfor %}
+
+    </div>
+
+
+
+    <!-- Recent Activity -->
+
+    <div class="dashboard-card">
+
+        <h3>Recent Activity</h3>
+
+        <ul class="activity-list">
+
+            {% for employee in employees %}
+
+            <li>
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Employee <strong>{{ employee.user.get_full_name }}</strong> joined the company.
+
+            </li>
+
+            {% empty %}
+
+            <li>
+
+                No Recent Activity
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+{% endblock %}

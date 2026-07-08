@@ -1,0 +1,101 @@
+{% load static %}
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/empbase.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Anek+Malayalam:wght@100..800&family=Bungee&family=Gravitas+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Italianno&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Smooch+Sans:wght@100..900&family=Yesteryear&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="employee-container">
+      <!-- ================= Sidebar ================= -->
+
+      <aside class="employee-sidebar">
+        <div>
+          <div class="employee-logo">
+            <i class="fa-solid fa-user"></i>
+
+            <h2>EMPLOYEE</h2>
+          </div>
+
+          <div class="employee-menu">
+            <h4>MENU</h4>
+
+            <a href="{% url 'employee_dashboard' %}" class="active">
+              <i class="fa-solid fa-house"></i>
+
+              Dashboard
+            </a>
+
+            <a href="{% url 'apply_leave' %}">
+              <i class="fa-solid fa-calendar-plus"></i>
+
+              Apply Leave
+            </a>
+
+            <a href="{% url 'leave_history' %}">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+
+              Leave History
+            </a>
+
+            <a href="{% url 'employee_profile' %}">
+              <i class="fa-solid fa-user"></i>
+
+              My Profile
+            </a>
+          </div>
+        </div>
+
+        <div class="employee-logout">
+          <a href="{% url 'login' %}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+          </a>
+        </div>
+      </aside>
+
+      <!-- ================= Main ================= -->
+
+      <main class="employee-main">
+        <!-- Header -->
+
+        <div class="employee-topbar">
+          <div>
+            <h2>Employee Dashboard</h2>
+
+            <p>Welcome, {{ request.user.first_name }}</p>
+          </div>
+
+          <div class="employee-profile">
+            <i class="fa-solid fa-circle-user"></i>
+
+            <span>{{ request.user.username }}</span>
+          </div>
+        </div>
+
+        {% block content %} {% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

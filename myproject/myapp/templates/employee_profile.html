@@ -1,0 +1,125 @@
+{% extends 'empbase.html' %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="employee-dashboard-card">
+
+    <div class="employee-header">
+
+        <div>
+
+            <h2>My Profile</h2>
+
+            <p class="employee-subtitle">
+                View your personal and employment details.
+            </p>
+
+        </div>
+
+        <div class="profile-avatar">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+    </div>
+
+    <div class="employee-info">
+
+        <div class="employee-box">
+
+            <h5>Full Name</h5>
+
+            <p>{{ employee.user.get_full_name }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Employee ID</h5>
+
+            <p>{{ employee.employee_id }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Username</h5>
+
+            <p>{{ employee.user.username }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Department</h5>
+
+            <p>{{ employee.department }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Designation</h5>
+
+            <p>{{ employee.designation }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Phone</h5>
+
+            <p>{{ employee.phone }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Gender</h5>
+
+            <p>{{ employee.gender }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Joining Date</h5>
+
+            <p>{{ employee.joining_date }}</p>
+
+        </div>
+
+        <div class="employee-box full-width">
+
+            <h5>Address</h5>
+
+            <p>{{ employee.address }}</p>
+
+        </div>
+
+        <div class="employee-box">
+
+            <h5>Status</h5>
+
+            <p>
+
+                <span class="status {{ employee.status|lower }}">
+
+                    {{ employee.status }}
+
+                </span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

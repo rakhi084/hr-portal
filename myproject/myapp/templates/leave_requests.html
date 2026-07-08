@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Pending Leave Requests
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>Pending Leave Requests</h1>
+
+</div>
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Employee</th>
+                <th>Leave Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for leave in leaves %}
+
+            <tr>
+
+                <td>{{ leave.employee.user.get_full_name }}</td>
+
+                <td>{{ leave.leave_type }}</td>
+
+                <td>{{ leave.start_date }}</td>
+
+                <td>{{ leave.end_date }}</td>
+
+                <td>{{ leave.reason }}</td>
+
+                <td>
+
+                    <span class="status pending">
+
+                        {{ leave.status }}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <a href="{% url 'approve_leave' leave.id %}" class="approve-btn">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Approve
+
+                    </a>
+
+                    <a href="{% url 'reject_leave' leave.id %}" class="reject-btn">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                        Reject
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="7">
+
+                    No Pending Requests
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
